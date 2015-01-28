@@ -34,20 +34,11 @@ void processmessage(byte* payload);
 void playPattern(void);
 
 
-
-
-
-
-
 void callback(char* topic, byte* payload, unsigned int length) {
   payload[length] = '\0';
   Serial.println( (char*) payload);
   processmessage(payload);
 }
-
-
-
-
 
 
 void setup_MQTT() 
@@ -116,10 +107,6 @@ void setup() {
 }
 
 
-
-
-
-
 void loop() {
   if (!client.connected()) {
     client.connect(mqttClientID);
@@ -129,10 +116,6 @@ void loop() {
   client.loop();
   playPattern();
 }
-
-
-
-
 
 
 void processmessage( byte* payload) 
@@ -167,8 +150,6 @@ void processmessage( byte* payload)
     lightPattern = P_LIGHTNING;
   }
 }
-
-
 
 
 void playPattern(void)
@@ -235,20 +216,24 @@ void alternating()
   delay(1000);
 }
 
+
 void fade()
 {
   analogWrite(6, brightness); analogWrite(5, brightness);  brightness = brightness + fadeAmount;if (brightness == 0 || brightness == 255) {fadeAmount = -fadeAmount ; } delay(500);digitalWrite(5,HIGH); delay(50);digitalWrite(5,LOW); delay(50);digitalWrite(5,HIGH); delay(50);digitalWrite(5,LOW); delay(500);
 }
+
 
 void fast()
 {
   digitalWrite(5,HIGH); delay(100);digitalWrite(5,LOW); delay(100);
 }
 
+
 void skip()
 {
  analogWrite(6, brightness); digitalWrite(5, HIGH);  brightness = brightness + fadeAmount;if (brightness == 0 || brightness == 255) {fadeAmount = -fadeAmount ; } delay(200); digitalWrite(5,LOW); delay(200);
 }
+
 
 void dance()
 {
@@ -284,6 +269,7 @@ void pat()
   delay(450);  
 }
 
+
 void lightning()
 {
   digitalWrite(6,HIGH);
@@ -318,6 +304,4 @@ void lightning()
   digitalWrite(5,LOW);
   digitalWrite(6,LOW);
   delay(50);   
- 
-
 }
