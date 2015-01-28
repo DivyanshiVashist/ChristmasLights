@@ -14,7 +14,7 @@
 #define P_LIGHTNING  8
 
 #define PIN_1  5 
-#define PIN_2  6 
+#define PIN_2  1 
 
 
 int brightness = 0;    // how bright the LED is
