@@ -1,27 +1,31 @@
-from twython import Twython
+#from twython import Twython
+
+
+
+
+
+
+
+
+
 
 import paho.mqtt.client as mqtt
 import json 
 import time
 import datetime
+import tweepy
 
 
-
-CONSUMER_KEY = 'lVhJVwewWe3idmNl92XgI8COT'
-CONSUMER_SECRET = 'vyzzKFwmdLDszuSx0q7AaqNbQalX8IbAwLXXdxX1LSzR69ziRN'
-
-
-ACCESS_KEY= '2918024730-IzpIM8nhjj06hqBevov4bQ2QLwH5K8YdwQZH0X8'
-ACCESS_SECRET = 'aBctWjjijY7hYM4QKfnlo3SGbyHGfjSTxdfHA0o7xWf1i'
+CONSUMER_KEY = '72xtkM30wKdVxGmBKaKgV0NCg'
+CONSUMER_SECRET = 'lScZld895rum4HNqHzheyuB6vFhGanT5lNJAgsFXFcckN5jkzA'
 
 
+ACCESS_KEY= '2918024730-jlXv68bPqetVZwJDEwPrIHjxoI2Rz1C7SS8msAt'
+ACCESS_SECRET = 'oR1IpsHhky9GTwux2EhCiNKYWGExj0OZYaVAAhNdviB8Z'
 
-twitter = Twython(CONSUMER_KEY, CONSUMER_SECRET,
-                  ACCESS_KEY, ACCESS_SECRET)
-
-twitter.verify_credentials()
-
-twitter.get_home_timeline()
+auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)  
+auth.set_access_token(ACCESS_KEY, ACCESS_SECRET) 
+api = tweepy.API(auth)
 
 start= time.time()
 lastpat = 0
@@ -35,35 +39,42 @@ def on_connect(client, userdata, flags, rc):
 
 def getpost ():	
 	global lastpat
-	direct_message = twitter.get_direct_messages(since_id=240136858829479935)
-
-
-	for message in direct_messages: 
-		command = message['text']
-		
+	direct_message = api.direct_messages(count=1)
+	strdm= str(direct_message)
+	position= strdm.index('text=u')
+	#print(position)
 	
-	#user_timeline = twitter.get_user_timeline(screen_name="TheThirstyPlant",count=1)
-	#for tweet in user_timeline:
-	#	rectwt = tweet['text']
-		#client.connect("winter.ceit.uq.edu.au", 1883, 60)
-		#if lastpat != rectwt:
-		#	client.publish("/ChristmasLights/", str(rectwt) ) 
-		#	print rectwt
+	command = (strdm[int(position+7):int(position+7+25)])
+	
+	if "lightning" in command:
+		command= "lightning"
+	if"alternating" in command:
+		command = "alternating"
+	if "onoff" in command:
+		command = "onoff"
+	if "fade" in command:
+		command = "fade"
+	if "fast" in command:
+		command = "fade"
+	if "skip" in command:
+		command= "skip"
+	if "dance" in command:
+		command= "dance"
+	if "pat" in command:
+		command = "pat"
+	
+	client.connect("winter.ceit.uq.edu.au", 1883, 60)
+	if lastpat != command:
+		client.publish("ChristmasLights", str(command) ) 
+		print command
+		lastpat = command
 
-#			lastpat = rectwt
-
-		client.connect("winter.ceit.uq.edu.au", 1883, 60)
-		if lastpat != command:
-			client.publish("/ChristmasLights/", str(command) ) 
-			print command
-
-			lastpat = command	
 	
 	
 client = mqtt.Client()
 client.on_connect = on_connect
-getpost()
-
+getpost() # get post twice?
+						
 while 1: 
 	getpost()
 	time.sleep(15)
