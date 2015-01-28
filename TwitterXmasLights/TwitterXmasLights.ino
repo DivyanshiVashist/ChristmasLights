@@ -34,25 +34,23 @@ void processmessage(byte* payload);
 void playPattern(void);
 
 
-void callback(char* topic, byte* payload, unsigned int length) {
+void callback(char* topic, byte* payload, unsigned int length){
   payload[length] = '\0';
   Serial.println( (char*) payload);
   processmessage(payload);
 }
 
 
-void setup_MQTT() 
-{
+void setup_MQTT() {
   // EEPROM locations:
   // Unique MAC address can be stored in EEPROM using 'setMACaddress' sketch, which sets the last 3 bytes of this address.
   const int eepromMacFlag = 0; // 1 byte
   int eepromMacAddress = 1; // 3 bytes
   // Default MAC address for the ethernet controller.
-  static byte mac[] = {
-    0x90, 0xA2, 0xDA, 0x00, 0xFF, 0xFF  }; 
+  static byte mac[] = {0x90, 0xA2, 0xDA, 0x00, 0xFF, 0xFF}; 
 
   // Retrieve MAC address from EEPROM if present
-  if (EEPROM.read(eepromMacFlag) == '#') {
+  if (EEPROM.read(eepromMacFlag) == '#'){
     Serial.println("Retrieving MAC address from EEPROM");
     for (int i = 3; i < 6; i++)
       mac[i] = EEPROM.read(eepromMacAddress++);
@@ -118,42 +116,40 @@ void loop() {
 }
 
 
-void processmessage( byte* payload) 
-{ 
-  if( strcmp((char*)payload, "alternating")==0){
+void processmessage( byte* payload) { 
+  if( strcmp((char*)payload, "alternating")==0) {
     lightPattern = P_ALTERNATE;
   } 
-  else if (strcmp((char*)payload, "onoff")==0){
+  else if (strcmp((char*)payload, "onoff")==0) {
     lightPattern = P_ONOFF;
   } 
-  else if (strcmp((char*)payload, "fade")==0){
+  else if (strcmp((char*)payload, "fade")==0) {
     lightPattern = P_FADE; 
   }
   
-  else if (strcmp((char*)payload, "fast")==0){
+  else if (strcmp((char*)payload, "fast")==0) {
     lightPattern = P_FAST; 
   }
   
-  else if (strcmp((char*)payload, "skip")==0){
+  else if (strcmp((char*)payload, "skip")==0) {
     lightPattern = P_SKIP; 
   }
   
-  else if (strcmp((char*)payload, "dance")==0){
+  else if (strcmp((char*)payload, "dance")==0) {
     lightPattern = P_DANCE; 
   }
   
-  else if (strcmp((char*)payload, "pat")==0){
+  else if (strcmp((char*)payload, "pat")==0) {
     lightPattern = P_PAT; 
   }
   
-  else if (strcmp((char*)payload, "lightning")==0){
+  else if (strcmp((char*)payload, "lightning")==0) {
     lightPattern = P_LIGHTNING;
   }
 }
 
 
-void playPattern(void)
-{
+void playPattern(void) {
   switch (lightPattern) {
   case P_NONE:
     break;
@@ -195,8 +191,7 @@ void playPattern(void)
 
 //_______ PATTTERNS _________
 
-void onoff()
-{ 
+void onoff(){ 
   digitalWrite(PIN_2,HIGH);
   digitalWrite(PIN_1,HIGH);
   delay(500);
@@ -206,8 +201,7 @@ void onoff()
 }
 
 
-void alternating()
-{
+void alternating(){
   digitalWrite(PIN_2,HIGH);
   digitalWrite(PIN_1,LOW);
   delay(1000);
@@ -217,26 +211,22 @@ void alternating()
 }
 
 
-void fade()
-{
+void fade(){
   analogWrite(6, brightness); analogWrite(PIN_1, brightness);  brightness = brightness + fadeAmount;if (brightness == 0 || brightness == 255) {fadeAmount = -fadeAmount ; } delay(500);digitalWrite(PIN_1,HIGH); delay(50);digitalWrite(PIN_1,LOW); delay(50);digitalWrite(PIN_1,HIGH); delay(50);digitalWrite(PIN_1,LOW); delay(500);
 }
 
 
-void fast()
-{
+void fast(){
   digitalWrite(PIN_1,HIGH); delay(100);digitalWrite(PIN_1,LOW); delay(100);
 }
 
 
-void skip()
-{
+void skip(){
  analogWrite(PIN_2, brightness); digitalWrite(PIN_1, HIGH);  brightness = brightness + fadeAmount;if (brightness == 0 || brightness == 255) {fadeAmount = -fadeAmount ; } delay(200); digitalWrite(PIN_1,LOW); delay(200);
 }
 
 
-void dance()
-{
+void dance(){
   digitalWrite(PIN_2,HIGH);
   digitalWrite(PIN_1,LOW);
   delay(200);
@@ -251,8 +241,7 @@ void dance()
   delay(250);
 }
 
-void pat()
-{
+void pat(){
   digitalWrite(PIN_2,HIGH);
   digitalWrite(PIN_1,LOW);
   delay(200);
@@ -270,8 +259,7 @@ void pat()
 }
 
 
-void lightning()
-{
+void lightning(){
   digitalWrite(PIN_2,HIGH);
   digitalWrite(PIN_1,LOW);
   delay(200);
