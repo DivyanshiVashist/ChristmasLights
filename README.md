@@ -1,5 +1,4 @@
 # ChristmasLights
-Christmas Lights 
 
 This project will enable you to controll your Christmas Lights over Twitter ! 
 
