@@ -18,7 +18,7 @@ start= time.time()
 lastpat = 0
 
 def on_connect(client, userdata, flags, rc):
-	client.subscribe("/ChristmasLights/")
+	client.subscribe("ChristmasLights")
 
 
 def getpost ():	

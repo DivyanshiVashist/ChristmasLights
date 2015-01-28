@@ -13,8 +13,8 @@
 #define P_PAT  7
 #define P_LIGHTNING  8
 
-#define PIN_1 = 5 
-#define PIN_2 = 6 
+#define PIN_1  5 
+#define PIN_2  6 
 
 int led = 6;           // the pin that the LED is attached to
 int brightness = 0;    // how bright the LED is
@@ -197,111 +197,111 @@ void playPattern(void)
 
 void onoff()
 { 
-  digitalWrite(6,HIGH);
-  digitalWrite(5,HIGH);
+  digitalWrite(PIN_2,HIGH);
+  digitalWrite(PIN_1,HIGH);
   delay(500);
-  digitalWrite(6,LOW);
-  digitalWrite(5,LOW);
+  digitalWrite(PIN_2,LOW);
+  digitalWrite(PIN_1,LOW);
   delay(500);
 }
 
 
 void alternating()
 {
-  digitalWrite(6,HIGH);
-  digitalWrite(5,LOW);
+  digitalWrite(PIN_2,HIGH);
+  digitalWrite(PIN_1,LOW);
   delay(1000);
-  digitalWrite(6,LOW);
-  digitalWrite(5,HIGH);
+  digitalWrite(PIN_2,LOW);
+  digitalWrite(PIN_1,HIGH);
   delay(1000);
 }
 
 
 void fade()
 {
-  analogWrite(6, brightness); analogWrite(5, brightness);  brightness = brightness + fadeAmount;if (brightness == 0 || brightness == 255) {fadeAmount = -fadeAmount ; } delay(500);digitalWrite(5,HIGH); delay(50);digitalWrite(5,LOW); delay(50);digitalWrite(5,HIGH); delay(50);digitalWrite(5,LOW); delay(500);
+  analogWrite(6, brightness); analogWrite(PIN_1, brightness);  brightness = brightness + fadeAmount;if (brightness == 0 || brightness == 255) {fadeAmount = -fadeAmount ; } delay(500);digitalWrite(PIN_1,HIGH); delay(50);digitalWrite(PIN_1,LOW); delay(50);digitalWrite(PIN_1,HIGH); delay(50);digitalWrite(PIN_1,LOW); delay(500);
 }
 
 
 void fast()
 {
-  digitalWrite(5,HIGH); delay(100);digitalWrite(5,LOW); delay(100);
+  digitalWrite(PIN_1,HIGH); delay(100);digitalWrite(PIN_1,LOW); delay(100);
 }
 
 
 void skip()
 {
- analogWrite(6, brightness); digitalWrite(5, HIGH);  brightness = brightness + fadeAmount;if (brightness == 0 || brightness == 255) {fadeAmount = -fadeAmount ; } delay(200); digitalWrite(5,LOW); delay(200);
+ analogWrite(PIN_2, brightness); digitalWrite(PIN_1, HIGH);  brightness = brightness + fadeAmount;if (brightness == 0 || brightness == 255) {fadeAmount = -fadeAmount ; } delay(200); digitalWrite(PIN_1,LOW); delay(200);
 }
 
 
 void dance()
 {
-  digitalWrite(6,HIGH);
-  digitalWrite(5,LOW);
+  digitalWrite(PIN_2,HIGH);
+  digitalWrite(PIN_1,LOW);
   delay(200);
-  digitalWrite(6,LOW);
-  digitalWrite(5,HIGH);
+  digitalWrite(PIN_2,LOW);
+  digitalWrite(PIN_1,HIGH);
   delay(500);
-  digitalWrite(6,HIGH);
-  digitalWrite(5,HIGH);
+  digitalWrite(PIN_2,HIGH);
+  digitalWrite(PIN_1,HIGH);
   delay(250);
-  digitalWrite(6,LOW);
-  digitalWrite(5,LOW);
+  digitalWrite(PIN_2,LOW);
+  digitalWrite(PIN_1,LOW);
   delay(250);
 }
 
 void pat()
 {
-  digitalWrite(6,HIGH);
-  digitalWrite(5,LOW);
+  digitalWrite(PIN_2,HIGH);
+  digitalWrite(PIN_1,LOW);
   delay(200);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(300);
-  digitalWrite(6,HIGH);
+  digitalWrite(PIN_2,HIGH);
   delay(200);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(250);
-  digitalWrite(5,HIGH);
+  digitalWrite(PIN_1,HIGH);
   delay(300);  
-  digitalWrite(5,LOW);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_1,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(450);  
 }
 
 
 void lightning()
 {
-  digitalWrite(6,HIGH);
-  digitalWrite(5,LOW);
+  digitalWrite(PIN_2,HIGH);
+  digitalWrite(PIN_1,LOW);
   delay(200);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(300);
-  digitalWrite(6,HIGH);
+  digitalWrite(PIN_2,HIGH);
   delay(200);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(250);
-  digitalWrite(5,HIGH);
+  digitalWrite(PIN_1,HIGH);
   delay(300);  
-  digitalWrite(5,LOW);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_1,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(900); 
-  digitalWrite(5,HIGH);
-  digitalWrite(6,HIGH);
+  digitalWrite(PIN_1,HIGH);
+  digitalWrite(PIN_2,HIGH);
   delay(50);  
-  digitalWrite(5,LOW);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_1,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(50);    
-  digitalWrite(5,HIGH);
-  digitalWrite(6,HIGH);
+  digitalWrite(PIN_1,HIGH);
+  digitalWrite(PIN_2,HIGH);
   delay(50);  
-  digitalWrite(5,LOW);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_1,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(50);  
-  digitalWrite(5,HIGH);
-  digitalWrite(6,HIGH);
+  digitalWrite(PIN_1,HIGH);
+  digitalWrite(PIN_2,HIGH);
   delay(50);  
-  digitalWrite(5,LOW);
-  digitalWrite(6,LOW);
+  digitalWrite(PIN_1,LOW);
+  digitalWrite(PIN_2,LOW);
   delay(50);   
 }
