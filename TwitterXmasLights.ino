@@ -21,8 +21,7 @@ int brightness = 0;    // how bright the LED is
 int fadeAmount = 70;    // how many points to fade the LED by
 int lightPattern = P_NONE;
 
-byte server[] = {
-  130,102,129,175}; //winter.ceit.uq.edu.au
+byte server[] = {130,102,129,175}; //winter.ceit.uq.edu.au
 char connectName[25];
 char IPstring[80];
 static char mqttClientID[80];
@@ -33,13 +32,23 @@ PubSubClient client(server, 1883, callback, ethClient);
 
 void processmessage(byte* payload);
 void playPattern(void);
-//void callback(char* topic, byte* payload, unsigned int length);
+
+
+
+
+
+
 
 void callback(char* topic, byte* payload, unsigned int length) {
   payload[length] = '\0';
   Serial.println( (char*) payload);
   processmessage(payload);
 }
+
+
+
+
+
 
 void setup_MQTT() 
 {
@@ -90,6 +99,10 @@ void setup_MQTT()
   strcat(mqttClientID, "-arduino");
 }
 
+
+
+
+
 void setup() {
   pinMode(6,OUTPUT);
   pinMode(5,OUTPUT);
@@ -97,15 +110,20 @@ void setup() {
   Serial.begin(9600);
   setup_MQTT();
   if (client.connect(mqttClientID)) {
-    client.subscribe("/ChristmasLights/");
+    client.subscribe("ChristmasLights");
   } 
   lightPattern = P_NONE;
 }
 
+
+
+
+
+
 void loop() {
   if (!client.connected()) {
     client.connect(mqttClientID);
-    client.subscribe("/ChristmasLights/");
+    client.subscribe("ChristmasLights");
     return;
   }
   client.loop();
@@ -113,11 +131,8 @@ void loop() {
 }
 
 
-// PATTTERNS !!!!!!
 
 
-
-///////////////////////////////////////////////////////////////////
 
 
 void processmessage( byte* payload) 
@@ -152,6 +167,9 @@ void processmessage( byte* payload)
     lightPattern = P_LIGHTNING;
   }
 }
+
+
+
 
 void playPattern(void)
 {
@@ -192,6 +210,9 @@ void playPattern(void)
     break;
   }
 }
+
+
+//_______ PATTTERNS _________
 
 void onoff()
 { 
