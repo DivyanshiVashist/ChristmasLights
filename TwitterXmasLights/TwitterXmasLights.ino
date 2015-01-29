@@ -10,7 +10,7 @@
 #define P_FADE      4
 #define P_SKIP  5
 #define P_DANCE  6
-#define P_PAT  7
+#define P_JINGLE  7
 #define P_LIGHTNING  8
 
 #define PIN_1  5 
@@ -139,8 +139,8 @@ void processmessage( byte* payload) {
     lightPattern = P_DANCE; 
   }
   
-  else if (strcmp((char*)payload, "pat")==0) {
-    lightPattern = P_PAT; 
+  else if (strcmp((char*)payload, "jingle")==0) {
+    lightPattern = P_JINGLE; 
   }
   
   else if (strcmp((char*)payload, "lightning")==0) {
@@ -178,8 +178,8 @@ void playPattern(void) {
     dance();
     break;
     
-  case P_PAT:
-    pat();
+  case P_JINGLE:
+    jingle();
     break;
   
   case P_LIGHTNING:
@@ -241,7 +241,7 @@ void dance(){
   delay(250);
 }
 
-void pat(){
+void jingle(){
   digitalWrite(PIN_2,HIGH);
   digitalWrite(PIN_1,LOW);
   delay(200);
