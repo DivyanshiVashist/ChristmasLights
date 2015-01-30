@@ -6,10 +6,11 @@ import tweepy
 
                                           
 # ----- INSERT YOUR ACCOUNT INFORMATION BELOW ---------------
-CONSUMER_KEY = "INSERT YOUR CONSUMER KEY HERE" 
-CONSUMER_SECRET = "INSERT YOUR CONSUMER SECRET KEY HERE"
-ACCESS_KEY= "INSERT YOUR ACCESS KEY HERE"
-ACCESS_SECRET = "INSERT YOUR ACCESS SECRET KEY HERE"
+CONSUMER_KEY = "72xtkM30wKdVxGmBKaKgV0NCg" 
+CONSUMER_SECRET = "lScZld895rum4HNqHzheyuB6vFhGanT5lNJAgsFXFcckN5jkzA"
+ACCESS_KEY= "2918024730-jlXv68bPqetVZwJDEwPrIHjxoI2Rz1C7SS8msAt"
+ACCESS_SECRET = "oR1IpsHhky9GTwux2EhCiNKYWGExj0OZYaVAAhNdviB8Z"
+
 
 
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)  
@@ -24,7 +25,7 @@ def on_connect(client, userdata, flags, rc):
 
 
 def getpost ():	
-	global lastpatcd 
+	global lastpat 
 	direct_message = api.direct_messages(count=1)
 	strdm= str(direct_message)
 	position= strdm.index('text=u')
