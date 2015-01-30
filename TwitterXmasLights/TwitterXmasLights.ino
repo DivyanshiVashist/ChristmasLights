@@ -14,7 +14,7 @@
 #define P_LIGHTNING  8
 
 #define PIN_1  5 
-#define PIN_2  1 
+#define PIN_2  2 
 
 
 int brightness = 0;    // how bright the LED is
@@ -93,8 +93,8 @@ void setup_MQTT() {
 
 
 void setup() {
-  pinMode(6,OUTPUT);
-  pinMode(5,OUTPUT);
+  pinMode(PIN_1,OUTPUT);
+  pinMode(PIN_2,OUTPUT);
   //Ethernet.begin(mac,ip);
   Serial.begin(9600);
   setup_MQTT();
